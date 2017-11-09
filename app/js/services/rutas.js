@@ -8,7 +8,8 @@ function RutasService($http) {
 	const service = {};
 
 	service.countRutas = () => $http.get(`${apiUrl}rutas/count`);
-	service.postRuta = (rutas) => $http.post(`${apiUrl}rutas/replaceOrCreate`, rutas);
+	service.postRuta = (rutas) => $http.post(`${apiUrl}rutas/`, rutas);
+	service.putRuta = (id,ruta) => $http.put(`${apiUrl}rutas/${id}`, ruta);
 	service.deleteById = id => $http.delete(`${apiUrl}rutas/${id}`);
 
 	service.getRutas = filter => {

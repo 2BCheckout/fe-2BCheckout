@@ -8,7 +8,7 @@
 						<div class="input-field">
 							<i class="material-icons prefix">search</i>
 							<input  id="search" type="text" autocomplete="off"
-										 ng-model="ctrl.search" required>
+										 ng-model="ctrl.search">
 						</div>
 						<button type="submit" class=" modal-action modal-close waves-effect blue-grey btn-flat">Buscar</button>
 	      </form>
@@ -16,35 +16,69 @@
 		</div>
 	</div>
 
-	  <nav>
-			<div class="nav-wrapper blue-grey">
-				<ul class="right hide-on-med-and-down">
-					<li ng-click="ctrl.showSearch()">
-						<a class="modal-trigger" href="#search-modal"> <i class="material-icons right">search</i></a>
-					</li>
-					<li><a class="modal-trigger" href="#agregar"><i class="material-icons right">playlist_add</i></a></li>
-					<li><a> Hermanos </a></li>
-				</ul>
-			</div>	
-  </nav>
-  
+	<div class="col s9">
+      <h3 class="thin">Clientes</h3>
+        </div>
+
+
+        <table style="width:7%">
+		<tr>
+			<th>
+		<div class="add-button">
+        <a class="modal-trigger btn-floating btn-small waves-effect waves-light blue-grey" href="#agregar">
+         <i class="material-icons">add</i>
+        </a>
+        </div>
+        </th>
+
+        <th>
+        <div class="ng-click="ctrl.showSearch()"">
+        <a class="modal-trigger btn-floating btn-small blue-grey" href="#search-modal"> <i class="material-icons right blue-grey">search</i>
+        </a>
+         </div>
+             </th>
+		</tr>
+
+	</table>
 		<table class="bordered centered striped">
 	        <thead>
 	          <tr>
-	              <th data-field="nombre">Nombre</th>
-	              <th data-field="telefono">Telefono</th>
-	              <th data-field="saldo">Saldo</th>
-	              <th data-field="saldo">Editar</th>
-	              <th data-field="saldo">Eliminar</th>
+          			<th></th>
+	          	  <th data-field="identidad" name="identidad">
+                  <a id="identidad-header" ng-click="ctrl.sortClients('identidad')" class="waves-effect waves-blue darken-4 btn-flat">
+                    Numero Id
+                  </a>
+                </th>
+	              <th data-field="nombre" name="nombres">
+                  <a id="nombres-header" ng-click="ctrl.sortClients('nombres')" class="waves-effect waves-blue darken-4 btn-flat">
+                    Nombre
+                  </a>
+                </th>
+	              <th data-field="telefono" name="telefono">
+                  <a id="telefono-header" ng-click="ctrl.sortClients('telefono')" class="waves-effect waves-blue darken-4 btn-flat">
+                    Telefono
+                  </a>
+                </th>
+	              <th data-field="colonia" name="colonia">
+                  <a id="colonia-header" ng-click="ctrl.sortClients('colonia')" class="waves-effect waves-blue darken-4 btn-flat">
+                    Colonia
+                  </a>
+                </th>
+				  <th data-field="editar">Tarjetas</th>
+	              <th data-field="editar">Editar</th>
+	              <th data-field="eliminar">Eliminar</th>
 	          </tr>
 	        </thead>
 	        <tbody>
 	          <tr ng-repeat="client in ctrl.clients">
-	            <td><a href="/clientes/{{client.id_cliente}}/tarjetas" class="waves-effect waves-blue darken-4 btn-flat">{{ctrl.getFullName(client)}}</a></td>
+	          	<td> {{$index+1}} </td>
+	          	<td>{{client.identidad}}</td>
+	            <td>{{client.nombres}}</td>
 	            <td>{{client.telefono ? client.telefono : 'N:A'}}</td>
-	            <td>Lps. {{client.total}}</td>
-	            <td><a class="btn-floating btn-large waves-effect waves-light  blue darken-4 modal-trigger" href="#editar" ng-click="ctrl.setFocusedClient(client.id_cliente)"><i class="material-icons">mode_edit</i></a></td>
-	            <td><a class="btn-floating btn-large waves-effect waves-light  red darken-2 modal-trigger" href="#eliminar" ng-click="ctrl.setFocusedClient(client.id_cliente)"><i class="material-icons">delete</i></a></td>
+	            <td>{{client.colonia}}</td>
+				<td><a id="editar-client" class="btn-floating waves-effect waves-light  green darken-4 modal-trigger btn-small" href="/clientes/{{client.idCliente}}/tarjetas" ><i class="material-icons">picture_in_picture</i></a></td>
+	            <td><a id="editar-client" class="btn-floating waves-effect waves-light  blue darken-4 modal-trigger btn-small" href="#editar" ng-click="ctrl.setFocusedClient(client.idCliente)"><i class="material-icons">mode_edit</i></a></td>
+	            <td><a id="eliminar-client" class="btn-floating waves-effect waves-light  red darken-2 modal-trigger btn-small" href="#eliminar" ng-click="ctrl.setFocusedClient(client.idCliente)"><i class="material-icons">delete</i></a></td>
 	          </tr>
 	        </tbody>
     </table>
@@ -76,32 +110,32 @@
 		      <!--txt Nombre-->
 					<form action="" name="ctrl.postClientForm" id="post-client" method="post">
 						<div class="row center">
-							<div class="input-field col s6">
-								<input placeholder="Primer Nombre" type='text'
-											 name='firstName' id='f-name' ng-model="ctrl.post.firstname" required
+							<div class="input-field col s12">
+								<input placeholder="Numero de Indentidad" type='text'
+											 name='identity' id='id-num' ng-model="ctrl.post.identity" required
+											 class="{{ctrl.post.identity.length > 0 ? '' : 'invalid'}}">
+							</div>
+						</div>
+						<div class="row center">
+							<div class="input-field col s12">
+								<input placeholder="Nombre Completo" type='text'
+											 name='firstName' id='f-name' ng-model="ctrl.post.name" required
 											 class="{{ctrl.post.firstname.length > 0 ? '' : 'invalid'}}">
 							</div>
-							<div class="input-field col s6">
-								<input placeholder="Segundo Nombre" id="s-nombre" type="text"
-											 name='middlename' ng-model="ctrl.post.middlename">
-							</div>
 						</div>
-
+						<!--txt direccion-->
 						<div class="row center">
 							<div class="input-field col s6">
-								<input placeholder="Primer Apellido" id="p-apellido" type="text"
-											 name="lastname" ng-model="ctrl.post.lastname" required
-											 class="{{ctrl.post.lastname.length > 0 ? '' : 'invalid'}}">
+								<i class="material-icons prefix">location_on</i>
+								<input placeholder="Direccion" id="direccion" type="text"
+								       ng-model="ctrl.post.address" required
+											 class="{{ctrl.post.address.length > 0 ? '' : 'invalid'}}">
 							</div>
-							<div class="input-field col s6">
-								<input placeholder="Segundo Apellido" id="s-apellido" type="text"
-								       name="secondLastname" ng-model="ctrl.post.secondLastname">
-							</div>
-						</div>
+
 
 						<!--txt Telefono-->
-						<div class="row">
-							<div class="input-field col s12">
+
+							<div class="input-field col s6">
 								<i class="material-icons prefix">phone</i>
 								<input placeholder="Telefono" id="telefono" type="text"
 								       ng-model="ctrl.post.phone" required
@@ -124,35 +158,45 @@
 		    <div class="modal-content">
 		      <h5>EDITAR</h5>
 		      <p>Formulario de edici&#243;n de cliente</p>
-		      <div class="row center">
-		      <!--txt Nombre-->
-		      	<row>
-			      	<div class="input-field col s6">
-						<input placeholder="Primer Nombre" type='text' id='primer-nombre' ng-model="ctrl.focusedClient.primerNombre" required class="{{ctrl.focusedClient.primerNombre.length > 0 ? '' : 'invalid'}}">
-					</div>
-					<div class="input-field col s6">
-						<input placeholder="Segundo Nombre" id="segundo-nombre" type="text" ng-model="ctrl.focusedClient.segundoNombre">
-					</div>
-				</row>
-				<row>
-					<div class="row center">
-						<div class="input-field col s6">
-							<input placeholder="Primer Apellido" id="primer-apellido" type="text" ng-model="ctrl.focusedClient.primerApellido" required class="{{ctrl.focusedClient.primerApellido.length > 0 ? '' : 'invalid'}}">
-						</div>
-						<div class="input-field col s6">
-							<input placeholder="Segundo Apellido" id="segundo-apellido" type="text" ng-model="ctrl.focusedClient.segundoApellido">
-						</div>
-					</div>
-				</row>
-				<row>
-					<!--txt Telefono-->
-					<div class="row">
-						<div class="input-field col s12">
-							<i class="material-icons prefix">phone</i>
-							<input placeholder="telefono" id="telefono" type="text" ng-model="ctrl.focusedClient.telefono" required class="{{ctrl.focusedClient.telefono.length > 0 ? '' : 'invalid'}}">
-						</div>
-					</div>
-				</row>
+		        <!--txt Nombre-->
+              <form action=""  id="put-client" method="put">
+                <div class="row center">
+                  <div class="input-field col s12">
+                    <input placeholder="Numero de Indentidad" type='text'
+                           ng-model="ctrl.focusedClient.identidad" required
+                           class="{{ctrl.focusedClient.identidad.length > 0 ? '' : 'invalid'}}">
+                  </div>
+                </div>
+                <div class="row center">
+                  <div class="input-field col s12">
+                    <input placeholder="Nombre Completo" type='text'
+                           ng-model="ctrl.focusedClient.nombres" required
+                           class="{{ctrl.focusedClient.nombres.length > 0 ? '' : 'invalid'}}">
+                  </div>
+                </div>
+                <!--txt direccion-->
+                <div class="row center">
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">location_on</i>
+                    <input placeholder="Direccion" type="text"
+                           ng-model="ctrl.focusedClient.colonia" required
+                           class="{{ctrl.focusedClient.colonia.length > 0 ? '' : 'invalid'}}">
+                  </div>
+
+
+                  <!--txt Telefono-->
+
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">phone</i>
+                    <input placeholder="Telefono" type="text"
+                           ng-model="ctrl.focusedClient.telefono" required
+                           class="{{ctrl.focusedClient.telefono.length > 0 ? '' : 'invalid'}}">
+                  </div>
+                </div>
+            </div>
+
+
+
 		    <div class="modal-footer">
 		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
 		      <a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat" ng-click="ctrl.edit()">EDITAR</a>
@@ -168,14 +212,14 @@
 		      <p>Esta seguro que desea eliminar al siguiente cliente?</p>
 		      <row>
 		      	<div class="col s12">
-		      		<label><i class="material-icons prefix">account_circle</i> {{ctrl.getFullName(ctrl.focusedClient)}}</label>
+		      		<label><i class="material-icons prefix">perm_identity</i> {{ctrl.focusedClient.identidad}}</label>
 		      	</div>
 		      </row>
-		      <row>
-		      	<div class="col s12">
-		      		<label><i class="material-icons prefix">phone</i> {{ctrl.focusedClient.telefono}}</label>
-		      	</div>
-		      </row>
+          <row>
+            <div class="col s12">
+              <label><i class="material-icons prefix">account_circle</i> {{ctrl.focusedClient.nombres}}</label>
+            </div>
+          </row>
 		    </div>
 		    <div class="modal-footer">
 		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
@@ -187,6 +231,17 @@
 	<script>
 		$(document).ready(function(){
 			$('.modal').modal();
+      $('select').material_select();
+
+			//$('#agregar-client').on('click', () => $('select').material_select());
+      //$('#editar-client').on('click', () => $('select').material_select());
+			$('.modal-wrapper').css('z-index', '-1');
+		  $('#search-modal').modal({
+		     ready:  () => $('.modal-wrapper').css('z-index', '1003'),
+         complete: () => $('.modal-wrapper').css('z-index', '-1')
+      });
 		});
+
+
 	</script>
 </main>
