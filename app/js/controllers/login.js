@@ -17,8 +17,8 @@ function LoginController(UserService, SessionService, $timeout, $state) {
     let promise = UserService.login(credentials);
 
     promise.then(response => {
-      let { id, userId, ttl } = response.data;
-      SessionService.setSession({userId, email, accessToken: id, ttl});
+      let { id, userId, ttl, rol, name } = response.data;
+      SessionService.setSession({userId, email, accessToken: id, ttl, name, rol});
       vm.handleLoginSuccess();
     } );
 

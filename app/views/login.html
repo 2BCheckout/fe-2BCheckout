@@ -1,7 +1,7 @@
 <main class="vw-login">
   <div align="center"><img src="images/ebenezer.png" width="150px"/></div>
     <div class="center container login-content">
-      <div class="z-depth-1 grey lighten-5 row" style="display: inline-block; padding: 32px 70px 0px 70px; border: 1px solid #ede7f6;">
+      <div class="z-depth-1 grey lighten-5 row" style="min-width: 27rem; display: inline-block; padding: 32px 70px 0px 70px; border: 1px solid #ede7f6;">
         <form id="login-form" class="col s12" method="post" name="loginForm">
 
           <span class="red-text" ng-show="ctrl.errorMessage.length"> {{ctrl.errorMessage}} </span>
@@ -63,9 +63,6 @@
               <input class="validate" type='password' name='password' id='password' ng-model="ctrl.password" required/>
               <label for='password'>Contrase&#241;a</label>
             </div>
-            <label style='float: right;'>
-              <a class='Roboto' href='#!'><b>Olvide mi contrase&#241;a</b></a>
-            </label>
           </div>
 
           <br />

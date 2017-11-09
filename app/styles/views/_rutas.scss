@@ -1,4 +1,4 @@
-.vw-service {
+.vw-rutas {
 	width: 82%;
    	left: 17%;
 	  .add-button {
@@ -6,4 +6,12 @@
 	    right: 1.5%;
 	    top: 1.5%;
 	  }
+		.modal-footer {
+			position: relative;
+
+			a {
+				bottom: 0.25rem;
+				right: 0.5rem;
+			}
+		}
 }

@@ -18,7 +18,7 @@ function RutasController (RutasService, $q) {
   vm.setFocusedRoute = id => vm.focusedRoute = vm.getRouteById(id);
 
   vm.edit = () => {
-    let promise = vm.postRuta(vm.focusedRoute);
+    let promise = vm.putRuta(vm.focusedRoute);
     promise.then(() => {
       Materialize.toast('Ruta editada exitosamente', 5000);
       vm.loadRutas();
@@ -84,6 +84,7 @@ function RutasController (RutasService, $q) {
 
   vm.getRutasCount = () => RutasService.countRutas();
   vm.postRuta = (ruta) => RutasService.postRuta(ruta);
+  vm.putRuta = (ruta) => RutasService.putRuta(ruta.idRuta, ruta);
 
   vm.searchRutas = () => {
     let regexp = `/${vm.search}/`;

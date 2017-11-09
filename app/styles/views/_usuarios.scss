@@ -1,8 +1,8 @@
-.vw-service {
+.vw-users {
    background-color: white;
    width: 82%;
    left: 17%;
-   
+
    nav
    {
       color: #fff !important;
@@ -45,7 +45,7 @@
         height: 10rem;
         width: 82%;
         bottom: 0;
-        z-index: 0;
+        z-index: 333;
    }
    #search-modal {
       position: absolute;

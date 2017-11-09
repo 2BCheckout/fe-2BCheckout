@@ -25,20 +25,54 @@ main {
   padding-right: 1rem;
 }
 
+@media screen and (max-width: 1510px) {
+	#mySidenavN {
+		.card .card-title {
+			font-size: 18px;
+		}
+	}
+}
+
+@media screen and (max-width: 1470px) {
+	#mySidenavN {
+		.card .card-title {
+			font-size: 16px;
+		}
+	}
+}
+
 @media screen and (max-width: 1375px) {
 	#mySidenavN {
 		.material-icons {
 			font-size: 20px;
 		}
-		.card-title {
+		.card .card-title {
+			font-size: 14px;
+		}
+	}
+}
+
+@media screen and (max-width: 1265px) {
+	#mySidenavN {
+		.card .card-title {
 			font-size: 15px;
+		}
+	}
+}
+
+@media screen and (max-width: 1280px) {
+	#mySidenavN {
+		.card {
+			a {
+				padding-left: 18px;
+			}
 		}
 	}
 }
 
 @media screen and (max-width: 1024px) {
 	main {
-		position: static;
+		//position: static;
 	}
 	.vw-client {
 		padding: 0;
@@ -78,7 +112,6 @@ main {
 	#sidebar-ico {
 		position: fixed;
 	    top: 2.5%;
-	    left: 4%;
 	    z-index: 2;
 	    font-size: 2.5rem;
 	    cursor: pointer;
@@ -98,4 +131,21 @@ main {
 
 table.striped > tbody > tr:nth-child(odd) {
   background-color: #f7f7f7;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
+
+.modal-overlay {
+	
+	background: black;
+}
+
+@media all and (min-width: 1024px) {
+	[class*=vw-] {
+		width: 84%;
+		left: 16%;
+	}
 }

@@ -22,9 +22,12 @@ function UserService($http) {
     return $http.get(`${apiUrl}Users?filter[include]=roles&filter=${JSON.stringify(filter)}`);
   }
 
-  service.getRoles = () => {return ['⁠⁠⁠admin', 'cajero', 'movil'];}
+  service.getRoles = () => {return ['movil', 'cajero', 'admin'];}
 
-  service.postUser = (user) => $http.post(`${apiUrl}Users/replaceOrCreate`, user);
+  service.postUser = (user) => $http.post(`${apiUrl}Users`, user);
+  service.updateUser = (user) => $http.put(`${apiUrl}Users/${user.id}`, user);
+  service.activateUser = (email) => $http.post(`${apiUrl}Users/activate?email=${email}`);
+  service.desactivateUser = (email) => $http.post(`${apiUrl}Users/desactivate?email=${email}`);
   service.deleteById = id => $http.delete(`${apiUrl}Users/${id}`);
 
   return service;
