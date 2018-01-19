@@ -7,14 +7,15 @@ function RutasService($http) {
 
 	const service = {};
 
-	service.countRutas = () => $http.get(`${apiUrl}rutas/count`);
-	service.postRuta = (rutas) => $http.post(`${apiUrl}rutas/replaceOrCreate`, rutas);
-	service.deleteById = id => $http.delete(`${apiUrl}rutas/${id}`);
+	service.countRutas = () => $http.get(`${apiUrl}routes/count`);
+	service.postRuta = (rutas) => $http.post(`${apiUrl}routes/`, rutas);
+	service.putRuta = (id,ruta) => $http.put(`${apiUrl}routes/${id}`, ruta);
+	service.deleteById = id => $http.delete(`${apiUrl}routes/${id}`);
 
 	service.getRutas = filter => {
     if(!filter)
-      return $http.get(`${apiUrl}rutas`);
-    return $http.get(`${apiUrl}rutas?filter=${JSON.stringify(filter)}`);
+			return $http.get(`${apiUrl}routes`);
+    return $http.get(`${apiUrl}routes?filter=${JSON.stringify(filter)}`);
   }
 
 

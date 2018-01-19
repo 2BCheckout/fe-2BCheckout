@@ -12,7 +12,17 @@ function OnRun($rootScope, AppSettings, $state, SessionService, UserService) {
 
     $rootScope.pageTitle += AppSettings.appTitle;
     if (Object.keys(localStorage).length >= 1 && toState.name != 'Login') {
-        $('#mySidenavN').removeClass('hidden');
+        let {name,rol} = SessionService.getSession();
+        let $sidenav = $('#mySidenavN');
+        $sidenav.removeClass('hidden');
+        $sidenav.find('.name').html(name);
+        if (rol!='admin') {
+          $sidenav.find('#Usuarios').addClass('ng-hide');
+          $sidenav.find('#ReportGeneration').addClass('ng-hide');
+        }else{
+          $sidenav.find('#Usuarios').removeClass('ng-hide');
+          $sidenav.find('#ReportGeneration').removeClass('ng-hide');
+        }
     }
   });
 
@@ -26,7 +36,7 @@ function OnRun($rootScope, AppSettings, $state, SessionService, UserService) {
     checker(toState);
  })
 
- 
+
  setInterval(() => {
    let session = SessionService.getSession();
    if($state.current.name !== 'Login' && !session){
@@ -42,7 +52,7 @@ function OnRun($rootScope, AppSettings, $state, SessionService, UserService) {
       if (goState === 'Login') {
         $('#mySidenavN').addClass('hidden');
         let promise = UserService.logout();
-        
+
         promise.then(()=>{
           SessionService.removeSession();
         })
@@ -58,14 +68,12 @@ function OnRun($rootScope, AppSettings, $state, SessionService, UserService) {
      if (toState.name !== 'Login' && toState.name !== 'Client') {
         $('#sidebar-ico').css({
           'top': '.5%',
-          'left': '1%',
-          'color': '#000'
+          'color': 'black'
         })
      } else if (toState.name === 'Client') {
       $('#sidebar-ico').css({
           'top': '2.5%',
-          'left': '4%',
-          'color': '#fff'
+          'color': 'black'
         })
      }
    };
