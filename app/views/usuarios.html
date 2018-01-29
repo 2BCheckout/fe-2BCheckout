@@ -48,28 +48,11 @@
       <!--txt Nombre-->
       <form action="" name="ctrl.postUserForm" id="post-user" method="post">
         <div class="row center">
-          <div class="input-field col s6">
+          <div class="input-field col s12">
             <i class="material-icons prefix">picture_in_picture</i>
-            <input placeholder="Primer Nombre" type='text'
-            name='firstName' id='f-name' ng-model="ctrl.post.firstname" required
-            class="{{ctrl.post.firstname.length > 0 ? '' : 'invalid'}}">
-          </div>
-          <div class="input-field col s6">
-            <input placeholder="Segundo Nombre" id="s-nombre" type="text"
-            name='middlename' ng-model="ctrl.post.middlename">
-          </div>
-        </div>
-
-        <div class="row center">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">picture_in_picture</i>
-            <input placeholder="Primer Apellido" id="p-apellido" type="text"
-            name="lastname" ng-model="ctrl.post.lastname" required
-            class="{{ctrl.post.lastname.length > 0 ? '' : 'invalid'}}">
-          </div>
-          <div class="input-field col s6">
-            <input placeholder="Segundo Apellido" id="s-apellido" type="text"
-            name="secondLastname" ng-model="ctrl.post.secondLastname">
+            <input placeholder="Nombre Completo" type='text'
+            name='name' id='f-name' ng-model="ctrl.post.name" required
+            class="{{ctrl.post.name.length > 0 ? '' : 'invalid'}}">
           </div>
         </div>
         <row>
@@ -81,13 +64,13 @@
         <row>
           <div class="input-field col s12">
             <i class="material-icons prefix">vpn_key</i>
-            <input placeholder="password" id="newPassword" type="password" class="validate" ng-model="ctrl.post.newPassword">
+            <input placeholder="password" id="newPassword" name="newPassword" type="password" class="validate" ng-model="ctrl.post.newPassword">
           </div>
         </row>
         <row>
           <div class="input-field col s12">
             <i class="material-icons prefix">email</i>
-            <input placeholder="email" id="email" type="text" class="validate" ng-model="ctrl.post.email">
+            <input placeholder="email" id="email" type="text" name="newEmail" class="validate" ng-model="ctrl.post.email">
           </div>
         </row>
         <row>
@@ -115,28 +98,11 @@
     <p>Formulario para editar un usuario</p>
     <!--txt Nombre-->
     <div class="row center">
-      <div class="input-field col s6">
+      <div class="input-field col s12">
         <i class="material-icons prefix">picture_in_picture</i>
-        <input placeholder="Primer Nombre" type='text'
-        name='firstName' id='f-name' ng-model="ctrl.focusedUser.firstName" required
-        class="{{ctrl.focusedUser.firstName.length > 0 ? '' : 'invalid'}}">
-      </div>
-      <div class="input-field col s6">
-        <input placeholder="Segundo Nombre" id="s-nombre" type="text"
-        name='middlename' ng-model="ctrl.focusedUser.secondName">
-      </div>
-    </div>
-
-    <div class="row center">
-      <div class="input-field col s6">
-        <i class="material-icons prefix">picture_in_picture</i>
-        <input placeholder="Primer Apellido" id="p-apellido" type="text"
-        name="lastname" ng-model="ctrl.focusedUser.firstSurname" required
-        class="{{ctrl.focusedUser.firstSurname.length > 0 ? '' : 'invalid'}}">
-      </div>
-      <div class="input-field col s6">
-        <input placeholder="Segundo Apellido" id="s-apellido" type="text"
-        name="secondLastname" ng-model="ctrl.focusedUser.secondSurname">
+        <input placeholder="Nombre Completo" type='text'
+        name='name' id='f-name' ng-model="ctrl.focusedUser.name" required
+        class="{{ctrl.focusedUser.name.length > 0 ? '' : 'invalid'}}">
       </div>
     </div>
     <row>

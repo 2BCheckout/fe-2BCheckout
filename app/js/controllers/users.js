@@ -15,7 +15,7 @@ function UsersController(UserService, $q) {
   console.log(vm.roles);
 
   vm.getFullName = (user) => {
-    return user.firstName + ' ' + user.firstSurname;
+    return user.name;
   };
 
   vm.setFocusedUser = id => vm.focusedUser = vm.getUserById(id);
@@ -53,10 +53,7 @@ function UsersController(UserService, $q) {
           console.log(user)
           return  {
             id: user.id,
-            firstName: user.firstName,
-            secondName: user.secondName,
-            firstSurname: user.firstSurname,
-            secondSurname: user.secondSurname,
+            name: user.name,
             email: user.email,
             type: user.roles[0].name,
             username: user.username
@@ -114,17 +111,14 @@ function UsersController(UserService, $q) {
   vm.desactivateUser = (email) => UserService.desactivateUser(email)
 
   vm.submitUser = () => {
-    let { firstname, middlename, lastname, secondLastname, email, rol, newPassword, newUsername } = vm.post;
+    let { name, email, rol, newPassword, newUsername } = vm.post;
     let user = {
-      firstName: firstname,
-      secondName: middlename ? middlename : '',
-      firstSurname: lastname,
-      secondSurname: secondLastname ? secondLastname : '',
+      name: name,
       email: email,
       type: rol,
       emailVerified: true,
       status: 'desactive',
-      password:newPassword,
+      password: newPassword,
       username: newUsername
     };
 
