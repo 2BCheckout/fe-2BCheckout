@@ -1,10 +1,10 @@
-<main class="vw-client">
+<main class="vw-student">
 
 		<!-- Modal Structure -->
 	<div class="modal-wrapper">
 		<div id="search-modal" class="modal bottom-sheet">
 			<div class="modal-footer">
-				<form name="searchForm" ng-submit="ctrl.searchClients()">
+				<form name="searchForm" ng-submit="ctrl.searchStudents()">
 						<div class="input-field">
 							<i class="material-icons prefix">search</i>
 							<input  id="search" type="text" autocomplete="off"
@@ -17,7 +17,7 @@
 	</div>
 
 	<div class="col s9">
-      <h3 class="thin">Clientes</h3>
+      <h3 class="thin">Estudiantes</h3>
         </div>
 
 
@@ -44,41 +44,46 @@
 	        <thead>
 	          <tr>
           			<th></th>
-	          	  <th data-field="identidad" name="identidad">
-                  <a id="identidad-header" ng-click="ctrl.sortClients('identidad')" class="waves-effect waves-blue darken-4 btn-flat">
-                    Numero Id
+	          	  <th data-field="account_number" name="account_number">
+                  <a id="account_number-header" ng-click="ctrl.sortStudents('account_number')" class="waves-effect waves-blue darken-4 btn-flat">
+                    Numero de Cuenta
                   </a>
                 </th>
-	              <th data-field="nombre" name="nombres">
-                  <a id="nombres-header" ng-click="ctrl.sortClients('nombres')" class="waves-effect waves-blue darken-4 btn-flat">
+	              <th data-field="names" name="names">
+                  <a id="names-header" ng-click="ctrl.sortStudents('names')" class="waves-effect waves-blue darken-4 btn-flat">
                     Nombre
                   </a>
                 </th>
-	              <th data-field="telefono" name="telefono">
-                  <a id="telefono-header" ng-click="ctrl.sortClients('telefono')" class="waves-effect waves-blue darken-4 btn-flat">
+	              <th data-field="phone" name="phone">
+                  <a id="phone-header" ng-click="ctrl.sortStudents('phone')" class="waves-effect waves-blue darken-4 btn-flat">
                     Telefono
                   </a>
                 </th>
-	              <th data-field="colonia" name="colonia">
-                  <a id="colonia-header" ng-click="ctrl.sortClients('colonia')" class="waves-effect waves-blue darken-4 btn-flat">
-                    Colonia
+                </th>
+	              <th data-field="email" name="email">
+                  <a id="email-header" ng-click="ctrl.sortStudents('email')" class="waves-effect waves-blue darken-4 btn-flat">
+                    Correo
                   </a>
                 </th>
-				  <th data-field="editar">Tarjetas</th>
+	              <th data-field="card_number" name="card_number">
+                  <a id="card_number-header" ng-click="ctrl.sortStudents('card_number')" class="waves-effect waves-blue darken-4 btn-flat">
+                    Numero de Carnet
+                  </a>
+                </th>
 	              <th data-field="editar">Editar</th>
 	              <th data-field="eliminar">Eliminar</th>
 	          </tr>
 	        </thead>
 	        <tbody>
-	          <tr ng-repeat="client in ctrl.clients">
+	          <tr ng-repeat="student in ctrl.students">
 	          	<td> {{$index+1}} </td>
-	          	<td>{{client.identidad}}</td>
-	            <td>{{client.nombres}}</td>
-	            <td>{{client.telefono ? client.telefono : 'N:A'}}</td>
-	            <td>{{client.colonia}}</td>
-				<td><a id="editar-client" class="btn-floating waves-effect waves-light  green darken-4 modal-trigger btn-small" href="/clientes/{{client.idCliente}}/tarjetas" ><i class="material-icons">picture_in_picture</i></a></td>
-	            <td><a id="editar-client" class="btn-floating waves-effect waves-light  blue darken-4 modal-trigger btn-small" href="#editar" ng-click="ctrl.setFocusedClient(client.idCliente)"><i class="material-icons">mode_edit</i></a></td>
-	            <td><a id="eliminar-client" class="btn-floating waves-effect waves-light  red darken-2 modal-trigger btn-small" href="#eliminar" ng-click="ctrl.setFocusedClient(client.idCliente)"><i class="material-icons">delete</i></a></td>
+	          	<td>{{student.account_number}}</td>
+	            <td>{{student.names}}</td>
+	            <td>{{student.phone ? student.phone : 'N:A'}}</td>
+	            <td>{{student.email}}</td>
+	            <td>{{student.card_number}}</td>
+	            <td><a id="editar-student" class="btn-floating waves-effect waves-light  blue darken-4 modal-trigger btn-small" href="#editar" ng-click="ctrl.setFocusedStudent(student.id)"><i class="material-icons">mode_edit</i></a></td>
+	            <td><a id="eliminar-student" class="btn-floating waves-effect waves-light  red darken-2 modal-trigger btn-small" href="#eliminar" ng-click="ctrl.setFocusedStudent(student.id)"><i class="material-icons">delete</i></a></td>
 	          </tr>
 	        </tbody>
     </table>
@@ -106,30 +111,35 @@
 		<!-- Modal CREAR -->
 		<div id="agregar" class="modal">
 		    <div class="modal-content">
-		      <h5>Ingresar Cliente</h5>
+		      <h5>Ingresar Estudiante</h5>
 		      <!--txt Nombre-->
-					<form action="" name="ctrl.postClientForm" id="post-client" method="post">
+					<form action="" name="ctrl.postStudentForm" id="post-student" method="post">
 						<div class="row center">
-							<div class="input-field col s12">
-								<input placeholder="Numero de Indentidad" type='text'
-											 name='identity' id='id-num' ng-model="ctrl.post.identity" required
-											 class="{{ctrl.post.identity.length > 0 ? '' : 'invalid'}}">
+							<div class="input-field col s6">
+								<input placeholder="Numero de Cuenta" type='text'
+											 name='account_number' id='id-num' ng-model="ctrl.post.account_number" required
+											 class="{{ctrl.post.account_number.length > 0 ? '' : 'invalid'}}">
+							</div>
+							<div class="input-field col s6">
+								<input placeholder="Numero de Carnet" type='text'
+											 name='card_number' id='id-num' ng-model="ctrl.post.card_number" required
+											 class="{{ctrl.post.card_number.length > 0 ? '' : 'invalid'}}">
 							</div>
 						</div>
 						<div class="row center">
 							<div class="input-field col s12">
 								<input placeholder="Nombre Completo" type='text'
-											 name='firstName' id='f-name' ng-model="ctrl.post.name" required
-											 class="{{ctrl.post.firstname.length > 0 ? '' : 'invalid'}}">
+											 name='names' id='f-name' ng-model="ctrl.post.names" required
+											 class="{{ctrl.post.names.length > 0 ? '' : 'invalid'}}">
 							</div>
 						</div>
 						<!--txt direccion-->
 						<div class="row center">
 							<div class="input-field col s6">
-								<i class="material-icons prefix">location_on</i>
-								<input placeholder="Direccion" id="direccion" type="text"
-								       ng-model="ctrl.post.address" required
-											 class="{{ctrl.post.address.length > 0 ? '' : 'invalid'}}">
+								<i class="material-icons prefix">email</i>
+								<input placeholder="Direccion de correo" id="direccion-de-correo" type="text"
+								       ng-model="ctrl.post.email" required
+											 class="{{ctrl.post.email.length > 0 ? '' : 'invalid'}}">
 							</div>
 
 
@@ -146,7 +156,7 @@
 		    <div class="modal-footer">
 		    	<a href="#!" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat">SALIR</a>
 		      	<button type="submit" class=" modal-action modal-close waves-effect waves-blue darken-4 btn-flat"
-						   ng-click="ctrl.submitClient(ctrl.postClientForm)" ng-show="ctrl.postClientForm.$valid">
+						   ng-click="ctrl.submitStudent(ctrl.postStudentForm)" ng-show="ctrl.postStudentForm.$valid">
 							CREAR
 						</button>
 		    </div>
@@ -157,30 +167,35 @@
 		<div id="editar" class="modal">
 		    <div class="modal-content">
 		      <h5>EDITAR</h5>
-		      <p>Formulario de edici&#243;n de cliente</p>
+		      <p>Formulario de edici&#243;n de Estudiante</p>
 		        <!--txt Nombre-->
-              <form action=""  id="put-client" method="put">
+              <form action=""  id="put-student" method="put">
                 <div class="row center">
-                  <div class="input-field col s12">
-                    <input placeholder="Numero de Indentidad" type='text'
-                           ng-model="ctrl.focusedClient.identidad" required
-                           class="{{ctrl.focusedClient.identidad.length > 0 ? '' : 'invalid'}}">
+                  <div class="input-field col s6">
+                    <input placeholder="Numero de Cuenta" type='text'
+                           ng-model="ctrl.focusedStudent.account_number" required
+                           class="{{ctrl.focusedStudent.account_number.length > 0 ? '' : 'invalid'}}">
+                  </div>
+                  <div class="input-field col s6">
+                    <input placeholder="Numero de Carnet" type='text'
+                           ng-model="ctrl.focusedStudent.card_number" required
+                           class="{{ctrl.focusedStudent.card_number.length > 0 ? '' : 'invalid'}}">
                   </div>
                 </div>
                 <div class="row center">
                   <div class="input-field col s12">
                     <input placeholder="Nombre Completo" type='text'
-                           ng-model="ctrl.focusedClient.nombres" required
-                           class="{{ctrl.focusedClient.nombres.length > 0 ? '' : 'invalid'}}">
+                           ng-model="ctrl.focusedStudent.names" required
+                           class="{{ctrl.focusedStudent.names.length > 0 ? '' : 'invalid'}}">
                   </div>
                 </div>
                 <!--txt direccion-->
                 <div class="row center">
                   <div class="input-field col s6">
-                    <i class="material-icons prefix">location_on</i>
-                    <input placeholder="Direccion" type="text"
-                           ng-model="ctrl.focusedClient.colonia" required
-                           class="{{ctrl.focusedClient.colonia.length > 0 ? '' : 'invalid'}}">
+                    <i class="material-icons prefix">email</i>
+                    <input placeholder="Direccion de correo" type="text"
+                           ng-model="ctrl.focusedStudent.email" required
+                           class="{{ctrl.focusedStudent.email.length > 0 ? '' : 'invalid'}}">
                   </div>
 
 
@@ -189,8 +204,8 @@
                   <div class="input-field col s6">
                     <i class="material-icons prefix">phone</i>
                     <input placeholder="Telefono" type="text"
-                           ng-model="ctrl.focusedClient.telefono" required
-                           class="{{ctrl.focusedClient.telefono.length > 0 ? '' : 'invalid'}}">
+                           ng-model="ctrl.focusedStudent.phone" required
+                           class="{{ctrl.focusedStudent.phone.length > 0 ? '' : 'invalid'}}">
                   </div>
                 </div>
             </div>
@@ -209,15 +224,15 @@
 		<div id="eliminar" class="modal">
 		    <div class="modal-content">
 		      <h5>ELIMINAR</h5>
-		      <p>Esta seguro que desea eliminar al siguiente cliente?</p>
+		      <p>Esta seguro que desea eliminar al siguiente estudiante?</p>
 		      <row>
 		      	<div class="col s12">
-		      		<label><i class="material-icons prefix">perm_identity</i> {{ctrl.focusedClient.identidad}}</label>
+		      		<label><i class="material-icons prefix">perm_identity</i> {{ctrl.focusedStudent.account_number}}</label>
 		      	</div>
 		      </row>
           <row>
             <div class="col s12">
-              <label><i class="material-icons prefix">account_circle</i> {{ctrl.focusedClient.nombres}}</label>
+              <label><i class="material-icons prefix">account_circle</i> {{ctrl.focusedStudent.names}}</label>
             </div>
           </row>
 		    </div>
@@ -233,11 +248,14 @@
 			$('.modal').modal();
       $('select').material_select();
 
-			//$('#agregar-client').on('click', () => $('select').material_select());
-      //$('#editar-client').on('click', () => $('select').material_select());
+			//$('#agregar-student').on('click', () => $('select').material_select());
+      //$('#editar-student').on('click', () => $('select').material_select());
 			$('.modal-wrapper').css('z-index', '-1');
 		  $('#search-modal').modal({
-		     ready:  () => $('.modal-wrapper').css('z-index', '1003'),
+		     ready:  () => {
+		     	$('.modal-wrapper').css('z-index', '1003');
+		     	$('#search').focus();
+		     },
          complete: () => $('.modal-wrapper').css('z-index', '-1')
       });
 		});
