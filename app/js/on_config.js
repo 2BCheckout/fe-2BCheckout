@@ -31,11 +31,11 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     templateUrl: 'report.html',
     title: 'Reporte de viajes'
   })
-  .state('Client',{
-    url: '/clientes',
-    controller: 'ClientController as ctrl',
-    templateUrl: 'cliente.html',
-    title: 'Clientes',
+  .state('Student',{
+    url: '/Estudiantes',
+    controller: 'StudentController as ctrl',
+    templateUrl: 'student.html',
+    title: 'Estudiantes',
   })
   .state('Rutas', {
     url: '/rutas',
@@ -52,20 +52,20 @@ function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $compil
     title: 'Usuarios'
   })
   .state('Cards', {
-    url: '/clientes/:clientId/tarjetas',
+    url: '/clientes/:studentId/tarjetas',
     controller: 'CardController as ctrl',
     templateUrl: 'card.html',
     title: 'Tarjetas',
     resolve: {
-      client: function($stateParams, ClientService) {
+      client: function($stateParams, StudentService) {
         'ngInject'
-        let id = $stateParams.clientId;
-        return ClientService.getClientById(id);
+        let id = $stateParams.studentId;
+        return StudentService.getStudentById(id);
       },
-      cards: function($stateParams, ClientService) {
+      cards: function($stateParams, StudentService) {
         'ngInject'
-        let id = $stateParams.clientId;
-        return ClientService.getCards(id);
+        let id = $stateParams.studentId;
+        return StudentService.getStudents(id);
       }
     }})
    .state('dashboard', {

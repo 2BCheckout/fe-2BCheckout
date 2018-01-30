@@ -1,63 +1,63 @@
 'use strict';
 
-function ClientController(ClientService, $q) {
+function StudentController(StudentService, $q) {
   'ngInject';
   // ViewModel
   const vm = this;
-  vm.clients = [];
+  vm.students = [];
   vm.pages = 0;
   vm.perPage = 100;
   vm.range = [];
   vm.activePage = 0;
-  vm.focusedClient = {};
-  vm.clientForm = {};
+  vm.focusedStudent = {};
+  vm.studentForm = {};
   vm.dir = -1;
   vm.filter = '';
   vm.order = '';
 
-  vm.setFocusedClient = id =>{
-   vm.focusedClient = vm.getClientById(id);};
+  vm.setFocusedStudent = id =>{
+   vm.focusedStudent = vm.getStudentById(id);};
 
   vm.edit = () => {
-    let promise = vm.updateClient(vm.focusedClient);
+    let promise = vm.updateStudent(vm.focusedStudent);
     promise.then(() => {
-      Materialize.toast('Cliente editado exitosamente',5000);
-      vm.loadClients();
+      Materialize.toast('Estudiante editado exitosamente',5000);
+      vm.loadStudents();
     });
     promise.catch(() => {
-      Materialize.toast('Error al editar cliente',5000);
-      vm.loadClients();
+      Materialize.toast('Error al editar estudiante',5000);
+      vm.loadStudents();
     });
   };
 
   vm.delete = () => {
-    let promise = vm.deleteById(vm.focusedClient.id);
+    let promise = vm.deleteById(vm.focusedStudent.id);
     promise.then(() => {
-      Materialize.toast('Cliente eliminado exitosamente', 5000);
-      vm.loadClients();
+      Materialize.toast('Estudiante eliminado exitosamente', 5000);
+      vm.loadStudents();
     });
     promise.catch(() => {
-      Materialize.toast('Error al eliminar cliente', 5000);
-      vm.loadClients();
+      Materialize.toast('Error al eliminar estudiante', 5000);
+      vm.loadStudents();
     });
   };
 
-  vm.updateClient = (client) => ClientService.updateClient(client);
-  vm.deleteById = id => ClientService.deleteById(id);
-  vm.getSortedClients = (limit, skip, filter, prop, dir) => { return ClientService.sortClients(limit, skip, filter, prop, dir); };
+  vm.updateStudent = (student) => StudentService.updateStudent(student);
+  vm.deleteById = id => StudentService.deleteById(id);
+  vm.getSortedStudents = (limit, skip, filter, prop, dir) => { return StudentService.sortStudents(limit, skip, filter, prop, dir); };
 
-  vm.getClientById = id => {
-    for (let i = 0; i < vm.clients.length; ++i)
-      if(vm.clients[i].id == id) {
-          let client = vm.clients[i];
-          console.log(client);
+  vm.getStudentById = id => {
+    for (let i = 0; i < vm.students.length; ++i)
+      if(vm.students[i].id == id) {
+          let student = vm.students[i];
+          console.log(student);
           return  {
-            id: client.id,
-            names: client.names,
-            email: client.email,
-            phone: client.phone,
-            card_number: client.card_number,
-            account_number: client.account_number
+            id: student.id,
+            names: student.names,
+            email: student.email,
+            phone: student.phone,
+            card_number: student.card_number,
+            account_number: student.account_number
           }
       }
   };
@@ -83,18 +83,18 @@ function ClientController(ClientService, $q) {
       }, 100);
   };
 
-  vm.getClients = (page) => {
+  vm.getStudents = (page) => {
     let skip = page * vm.perPage,
         limit = vm.perPage;
-    return ClientService.getClients(limit, skip, vm.filter);
+    return StudentService.getStudents(limit, skip, vm.filter);
   };
 
-  vm.loadClients = () => {
+  vm.loadStudents = () => {
 
     if(vm.order !== '')
-      vm.sortClients(vm.order, true);
+      vm.sortStudents(vm.order, true);
     else
-      vm.getClients(vm.activePage).then(response => { vm.clients = response.data;});
+      vm.getStudents(vm.activePage).then(response => { vm.students = response.data;});
   };
 
 
@@ -108,20 +108,20 @@ function ClientController(ClientService, $q) {
     let control = event.currentTarget.attributes['data-control'].value;
     let page = parseInt(vm.activePage);
     vm.activePage = control === 'foward' ? page + 1 >= vm.range.length-1 ? vm.range.length-1 : page + 1 : page - 1 <= 0 ? 0 : page - 1;
-    vm.loadClients();
+    vm.loadStudents();
   };
 
   vm.handlePageIndexClick = (event) => {
     vm.activePage = event.currentTarget.attributes['data-index'].value;
-    vm.loadClients();
+    vm.loadStudents();
   };
 
-  vm.getClientCount = () => ClientService.countClients();
-  vm.postClient = (client) => ClientService.postClient(client);
+  vm.getStudentCount = () => StudentService.countStudents();
+  vm.postStudent = (student) => StudentService.postStudent(student);
 
-  vm.sortClients = (prop, keepdirection) => {
+  vm.sortStudents = (prop, keepdirection) => {
     if(!prop)
-      vm.loadClients();
+      vm.loadStudents();
 
     let skip = vm.activePage * vm.perPage,
       limit = vm.perPage;
@@ -129,7 +129,7 @@ function ClientController(ClientService, $q) {
       vm.dir *= -1;
     vm.order = prop;
     let direction = vm.dir === 1 ? 'ASC' : 'DESC';
-    vm.getSortedClients(limit, skip, vm.filter, vm.order, direction).then(response => vm.clients = response.data);
+    vm.getSortedStudents(limit, skip, vm.filter, vm.order, direction).then(response => vm.students = response.data);
 
 
     $('#sort-icon').remove();
@@ -138,17 +138,16 @@ function ClientController(ClientService, $q) {
 
   };
 
-  vm.searchClients = () => {
+  vm.searchStudents = () => {
     if(`${vm.search}` === '' || `${vm.search}` === 'undefined' || `${vm.search}` === undefined) {
       vm.filter = '';
-      vm.loadClients();
+      vm.loadStudents();
       return;
     }
 
     let regexp = `/.*${`${vm.search}`.split(' ').join('[ a-zA-Z ]*')}.*/i`;
     let or =
     [
-      // { id: {regexp}},
       { names: {regexp}},
       { phone: {regexp}},
       { card_number: {regexp}},
@@ -156,14 +155,14 @@ function ClientController(ClientService, $q) {
       { email: {regexp}}
     ];
     vm.filter = {or};
-    let promise = ClientService.getClients(vm.perPage,vm.perPage*vm.activePage,{or});
-    promise.then( response =>  vm.clients = response.data);
+    let promise = StudentService.getStudents(vm.perPage,vm.perPage*vm.activePage,{or});
+    promise.then( response =>  vm.students = response.data);
     promise.catch( () => Materialize.toast('Error al realizar busqueda', 5000));
   };
 
-  vm.submitClient = () => {
+  vm.submitStudent = () => {
     let { account_number, card_number, names, email, phone } = vm.post;
-    let client = {
+    let student = {
       names: names,
       phone: phone,
       card_number: card_number,
@@ -171,23 +170,23 @@ function ClientController(ClientService, $q) {
       email: email
     };
 
-    let promise = vm.postClient(client);
+    let promise = vm.postStudent(student);
     promise.then(() => {
-      Materialize.toast('Cliente agregado exitosamente', 5000);
-      vm.loadClients();
+      Materialize.toast('Estudiante agregado exitosamente', 5000);
+      vm.loadStudents();
     });
     promise.catch(() => {
-      Materialize.toast('Error al agregar cliente', 5000);
-      vm.loadClients();
+      Materialize.toast('Error al agregar estudiante', 5000);
+      vm.loadStudents();
     });
     vm.post = {};
   };
 
-  let getCount   = vm.getClientCount(),
-  getClients = vm.getClients(0);
+  let getCount   = vm.getStudentCount(),
+  getStudents = vm.getStudents(0);
 
 
-  $q.all([getCount, getClients]).then( responses => {
+  $q.all([getCount, getStudents]).then( responses => {
     let { count } = responses[0].data;
     vm.pages = Math.ceil(count/vm.perPage);
     vm.range = [];
@@ -195,10 +194,10 @@ function ClientController(ClientService, $q) {
     for (let i = 0; i < vm.pages; i++)
       vm.range.push(i);
 
-    vm.clients = responses[1].data;
+    vm.students = responses[1].data;
   });
 }
 export default {
-  name: 'ClientController',
-  fn: ClientController
+  name: 'StudentController',
+  fn: StudentController
   };
