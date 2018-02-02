@@ -7,19 +7,19 @@ class TripService {
   }
 
   getCount() {
-    return this.$http.get(`${apiUrl}viajes/count`);
+    return this.$http.get(`${apiUrl}rides/count`);
   }
 
   getTripsCount(filter) {
     if(!filter)
-      return this.$http.get(`${apiUrl}viajes/getReport/count`);
-    return this.$http.get(`${apiUrl}viajes/getReport/count?filter=${filter}`);
+      return this.$http.get(`${apiUrl}rides/getReport/count`);
+    return this.$http.get(`${apiUrl}rides/getReport/count?filter=${filter}`);
   }
 
   getTrips(skip,limit,filter) {
     if(!filter)
-      return this.$http.get(`${apiUrl}viajes/getReport?skip=${skip}&limit=${limit}`);
-    return this.$http.get(`${apiUrl}viajes/getReport?filter=${filter}&skip=${skip}&limit=${limit}`);
+      return this.$http.get(`${apiUrl}rides/getReport?skip=${skip}&limit=${limit}`);
+    return this.$http.get(`${apiUrl}rides/getReport?filter=${filter}&skip=${skip}&limit=${limit}`);
   }
 }
 

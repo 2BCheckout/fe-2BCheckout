@@ -10,26 +10,22 @@
     <br/>
 		<table class="bordered centered highlight" >
 	        <thead>
-	          <tr>
-                <th data-field="ruta">Ruta</th>
-                <th data-field="bus">Bus</th>
-	              <th data-field="fecha">Fecha</th>
-	              <th data-field="conductor">Total</th>
-	              <th data-field="personas">Personas</th>
-	              <th data-field="descripcion">Descripcion</th>
-	              <th data-field="movimiento">Movimiento</th>
-	          </tr>
+	          	<tr>
+	                <th data-field="ruta">Ruta</th>
+	                <th data-field="bus">Bus</th>
+					<th data-field="fecha">Fecha</th>
+					<th data-field="personas">Total Estudiantes</th>
+					<th data-field="descripcion">Descripcion</th>
+	          	</tr>
 	        </thead>
 	        <tbody>
-	          <tr ng-repeat="viaje in ctrl.viajes">
-              <td>{{viaje.nombre}}</td>
-              <td>{{viaje.bus_placa}}</td>
-	            <td>{{ctrl.dateToString(viaje.fecha)}}</td>
-              <td>Lps. {{viaje.total || 0}}</td>
-	            <td>{{viaje.cantidad || 0}}</td>
-              <td>{{viaje.descripcion}}</td>
-              <td>{{viaje.tipo_movimiento}}</td>
-	          </tr>
+				<tr ng-repeat="viaje in ctrl.viajes">
+					<td>{{viaje.route.name}}</td>
+					<td>{{viaje.plate}}</td>
+					<td>{{ctrl.dateToString(viaje.date)}}</td>
+					<td>{{viaje.students.length}}</td>
+					<td>{{viaje.route.description}}</td>
+	          	</tr>
 	        </tbody>
     </table>
 		<!-- Pagination -->
