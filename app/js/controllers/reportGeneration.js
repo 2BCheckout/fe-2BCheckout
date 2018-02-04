@@ -53,15 +53,15 @@ class ReportGenerationController {
 
     if(this.isAnySet())
     {
-      this.route = this.getFilterValue(this.route);
-      this.busPlate = this.getFilterValue(this.busPlate);
-       this.filter.route = this.route;
-       this.filter.bus_plate = this.busPlate;
+      this.filter.route = this.route = this.getFilterValue(this.route);
+      this.filter.bus_plate = this.busPlate = this.getFilterValue(this.busPlate);
     }
   }
 
   isAnySet() {
-    return this.isSet(this.route)
+    return this.isSet(this.initialDate)
+        || this.isSet(this.limitDate)
+        || this.isSet(this.route)
         || this.isSet(this.busPlate);
   }
 
