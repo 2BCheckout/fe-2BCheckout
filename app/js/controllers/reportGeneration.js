@@ -35,30 +35,26 @@ class ReportGenerationController {
 
   setFilter() {
 
+    this.initialDate = this.isSet(this.initialDate) ?
+        this.getDateValue(new Date(this.initialDate)) : this.defaultInitialDate;
+
+    this.limitDate =  this.isSet(this.limitDate) ?
+        this.getDateValue(new Date(this.limitDate)) : this.getDateValue(new Date());
+
+    this.initialDate += ' 00:00:00';
+    this.limitDate += ' 23:59:59';
+
+    this.filter = {
+      'initial_date': this.initialDate,
+      'final_date': this.limitDate
+    };
+
+
+
     if(this.isAnySet())
     {
-
-      this.initialDate = this.isSet(this.initialDate) ?
-          this.getDateValue(new Date(this.initialDate)) : this.defaultInitialDate;
-
-      this.limitDate =  this.isSet(this.limitDate) ?
-          this.getDateValue(new Date(this.limitDate)) : this.getDateValue(new Date());
-      
-      this.initialDate += ' 00:00:00';
-      this.limitDate += ' 23:59:59';
-
-      this.route = this.getFilterValue(this.route);
-      this.busPlate = this.getFilterValue(this.busPlate);
-      let and =
-      [
-        { 'fecha_inicial': this.initialDate },
-        { 'fecha_limite': this.limitDate },
-        { 'nombre': this.route },
-        { 'tipo_movimiento': this.defaultFilterValue },
-        { 'bus_placa': this.busPlate },
-      ];
-
-      this.filter = {and};
+      this.filter.route = this.route = this.getFilterValue(this.route);
+      this.filter.bus_plate = this.busPlate = this.getFilterValue(this.busPlate);
     }
   }
 

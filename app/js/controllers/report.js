@@ -15,7 +15,7 @@ class ReportController {
     this.count = 0;
     this.filter = $stateParams.filter
     this.session = SessionService.getSession();
-    this.link = `${apiUrl}Viajes/GenerateExcelReport`;
+    this.link = `${apiUrl}rides/GenerateExcelReport`;
     this.setLink(); 
     console.log(this.link);
     this.getTrips();
