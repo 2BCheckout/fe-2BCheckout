@@ -161,13 +161,15 @@ function StudentController(StudentService, $q) {
   };
 
   vm.submitStudent = () => {
-    let { account_number, card_number, names, email, phone } = vm.post;
+    let { account_number, card_number, names, email, phone, newUsername, newPassword } = vm.post;
     let student = {
       names: names,
       phone: phone,
       card_number: card_number,
       account_number: account_number,
-      email: email
+      email: email,
+      username: newUsername,
+      password: newPassword
     };
 
     let promise = vm.postStudent(student);
