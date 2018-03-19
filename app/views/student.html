@@ -24,13 +24,12 @@
         <table style="width:7%">
 		<tr>
 			<th>
-		<div class="add-button">
-        <a class="modal-trigger btn-floating btn-small waves-effect waves-light blue-grey" href="#agregar">
-         <i class="material-icons">add</i>
-        </a>
-        </div>
-        </th>
-
+				<div class="add-button">
+		        	<a class="modal-trigger btn-floating btn-small waves-effect waves-light blue-grey" href="#agregar">
+			         <i class="material-icons">add</i>
+			        </a>
+		        </div>
+	        </th>
         <th>
         <div class="ng-click="ctrl.showSearch()"">
         <a class="modal-trigger btn-floating btn-small blue-grey" href="#search-modal"> <i class="material-icons right blue-grey">search</i>
@@ -126,6 +125,18 @@
 											 class="{{ctrl.post.card_number.length > 0 ? '' : 'invalid'}}">
 							</div>
 						</div>
+						<div class="row center">
+				          <div class="input-field col s12">
+				            <i class="material-icons prefix">perm_identity</i>
+				            <input placeholder="username" id="newUsername" type="text" ng-model="ctrl.post.newUsername" required class="{{ctrl.post.newUsername.length > 0 ? '' : 'invalid'}}">
+				          </div>
+				        </div>
+				        <div class="row center">
+				          <div class="input-field col s12">
+				            <i class="material-icons prefix">vpn_key</i>
+				            <input placeholder="password" id="newPassword" name="newPassword" type="password" ng-model="ctrl.post.newPassword" required class="{{ctrl.post.newPassword.length > 0 ? '' : 'invalid'}}">
+				          </div>
+				        </div>
 						<div class="row center">
 							<div class="input-field col s12">
 								<input placeholder="Nombre Completo" type='text'

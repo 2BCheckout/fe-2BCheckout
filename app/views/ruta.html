@@ -1,32 +1,12 @@
 <main class="vw-rutas">
-    <!-- Modal Structure -->
-  <div id="search-modal" class="modal bottom-sheet">
-    <div class="modal-footer">
-      <form name="searchForm" ng-submit="ctrl.searchRutas()">
-          <div class="input-field">
-            <i class="material-icons prefix">search</i>
-            <input  id="search" type="text" autocomplete="off"
-                   ng-model="ctrl.search" required>
-          </div>
-          <button type="submit" class=" modal-action modal-close waves-effect waves-green btn-flat">Buscar</button>
-      </form>
-    </div>
-  </div>
-
+  <div>
     <div class="col s9">
      <h3 class="thin">Rutas</h3>
-     </div>
-
-      <table style="width:7%">
-    <tr>
-      <th>
       <div class="add-button">
         <a class="modal-trigger btn-floating btn-small waves-effect waves-light blue-grey" href="#agregar">
           <i class="material-icons">add</i> </a>
       </div>
-      </th>
-      </tr>
-      </table>
+     </div>
 
       <table class="bordered centered highlight striped">
           <thead>

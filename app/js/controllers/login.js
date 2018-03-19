@@ -18,14 +18,18 @@ function LoginController(UserService, SessionService, $timeout, $state) {
 
     promise.then(response => {
       let { id, userId, ttl, rol, name } = response.data;
-      SessionService.setSession({userId, email, accessToken: id, ttl, name, rol});
-      vm.handleLoginSuccess();
+      if (rol==='admin') {
+        SessionService.setSession({userId, email, accessToken: id, ttl, name, rol});
+        vm.handleLoginSuccess();
+      }else{
+        vm.handleLoginFail('El rol no es valido!');
+      }
     } );
 
     promise.catch(vm.handleLoginFail)
   };
 
-  vm.handleLoginFail    = () => vm.hideLoader(true);
+  vm.handleLoginFail    = msg => vm.hideLoader(true, msg);
   vm.handleLoginSuccess = () => {
     vm.hideLoader(false);
   }
@@ -44,7 +48,7 @@ function LoginController(UserService, SessionService, $timeout, $state) {
     vm.loading      = true;
   }
 
-  vm.hideLoader = loginFailed =>
+  vm.hideLoader = (loginFailed, msg = 'Correo o contraseña invalida') =>
       $timeout(() => {
         vm.loginFailed = loginFailed;
         vm.loading     = false;
@@ -53,7 +57,7 @@ function LoginController(UserService, SessionService, $timeout, $state) {
         if(!loginFailed)
           $state.go('dashboard');
         else
-          vm.errorMessage = 'Correo o contraseña invalida';
+          vm.errorMessage = msg;
       }, 1250);
 
   loginMaterialize.init();
